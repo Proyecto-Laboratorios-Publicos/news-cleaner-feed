@@ -1,29 +1,59 @@
 from fetchers.rss_fetcher import RSSFetcher
 from cleaner.text_cleaner import TextCleaner
 
+# Diccionario maestro de categorías y sus feeds RSS especializados
+CATEGORIES = {
+    "1": {
+        "name": "Tecnología",
+        "url": "https://news.google.com/rss/search?q=tecnologia&hl=es-419&gl=AR&ceid=AR:es-419"
+    },
+    "2": {
+        "name": "Finanzas y Economía",
+        "url": "https://news.google.com/rss/search?q=economia+finanzas&hl=es-419&gl=AR&ceid=AR:es-419"
+    },
+    "3": {
+        "name": "Política",
+        "url": "https://news.google.com/rss/search?q=politica+argentina&hl=es-419&gl=AR&ceid=AR:es-419"
+    },
+    "4": {
+        "name": "Espectáculos",
+        "url": "https://news.google.com/rss/search?q=espectaculos+cine+musica&hl=es-419&gl=AR&ceid=AR:es-419"
+    }
+}
+
 def main():
-    print("=== Iniciando Agregador de Noticias sin Anuncios ===")
+    print("=== Agregador de Noticias sin Anuncios ===")
+    print("Seleccione la categoría que desea consultar:\n")
     
-    # URL del feed RSS de noticias de Google News (Argentina)
-    sample_feed_url = "https://news.google.com/rss?hl=es-419&gl=AR&ceid=AR:es-419"
+    for key, cat in CATEGORIES.items():
+        print(f"[{key}] {cat['name']}")
+        
+    choice = input("\nIngrese el número de la categoría: ").strip()
     
-    # Inicializar el conector RSS
-    fetcher = RSSFetcher(source_name="Google News RSS", endpoint_url=sample_feed_url)
-    print(f"Conectando a la fuente: {fetcher.source_name}...")
+    if choice not in CATEGORIES:
+        print("[-] Opción inválida. Ejecución finalizada.")
+        return
+        
+    selected_category = CATEGORIES[choice]
+    print(f"\n[+] Ha seleccionado: {selected_category['name']}")
     
-    # Obtener contenido real del feed RSS vía requests
+    # Inicializar el conector RSS con la URL específica de la categoría seleccionada
+    fetcher = RSSFetcher(source_name=selected_category['name'], endpoint_url=selected_category['url'])
+    print(f"Conectando al feed de {fetcher.source_name}...")
+    
+    # Obtener el contenido crudo vía requests
     raw_rss_data = fetcher.fetch()
     
     if raw_rss_data:
         print(f"\n[+] ¡Conexión exitosa! Datos descargados ({len(raw_rss_data)} caracteres).")
         
-        # Ejemplo de limpieza aplicado al contenido crudo obtenido o a un fragmento
+        # Procesar y limpiar el contenido usando BeautifulSoup
         print("\n[+] Procesando y limpiando contenido del feed...")
-        cleaned_output = TextCleaner.remove_ads_and_banners(raw_rss_data[:1500]) # Mostramos un snippet inicial limpio
+        cleaned_output = TextCleaner.remove_ads_and_banners(raw_rss_data)
         
-        print("\n--- CONTENIDO LIMPIO RESULTANTE (Muestra) ---")
-        print(cleaned_output[:600] + "...\n[Contenido truncado para visualización]")
-        print("---------------------------------------------")
+        print(f"\n--- CONTENIDO LIMPIO: {selected_category['name'].upper()} ---")
+        print(cleaned_output[:800] + "...\n[Contenido truncado para visualización]")
+        print("-------------------------------------------------------------")
     else:
         print("[-] No se pudieron obtener datos del feed RSS.")
 
