@@ -12,7 +12,7 @@ st.set_page_config(
     layout="wide"
 )
 
-# Diccionario maestro ampliado con los mejores diarios globales por categoría
+# Diccionario maestro con todas las categorías y fuentes optimizadas
 CATEGORIES = {
     "Technology": {
         "TechCrunch": "https://techcrunch.com/feed/",
@@ -88,22 +88,19 @@ CATEGORIES = {
 
 @st.cache_data(ttl=3600)
 def fetch_full_article(url: str):
-    """
-    Función optimizada para extraer la imagen principal y una lista ordenada 
-    de párrafos limpios del artículo de origen.
-    """
+    """ Función optimizada para extraer la imagen principal y una lista ordenada de párrafos limpios del artículo de origen. """
     try:
         headers = {'User-Agent': 'Mozilla/5.0 (Compatible; NewsCleanerBot/1.0)'}
         response = requests.get(url, headers=headers, timeout=10)
         if response.status_code != 200:
             return [], []
-
+        
         soup = BeautifulSoup(response.text, 'html.parser')
-
+        
         # Eliminar elementos molestos comunes
         for tag in soup(["script", "style", "nav", "footer", "header", "aside", "form", "iframe", "noscript"]):
             tag.decompose()
-
+            
         # Extraer la imagen principal
         images = []
         og_image = soup.find("meta", property="og:image")
@@ -113,24 +110,46 @@ def fetch_full_article(url: str):
             img_tag = soup.find("img")
             if img_tag and img_tag.get("src"):
                 images.append(img_tag["src"])
-
+                
         # Recolectar párrafos conservando la estructura individual
         paragraphs = soup.find_all('p')
         clean_paragraphs = []
-        
         for p in paragraphs:
             text = p.get_text().strip()
             if len(text) > 40:
                 cleaned_p = TextCleaner.remove_ads_and_banners(text)
                 if cleaned_p:
                     clean_paragraphs.append(cleaned_p)
-
+                    
         return clean_paragraphs, images
-
     except Exception as e:
         return [], []
 
 def main():
+    # Panel lateral: Selector de Tema (Sol ☀️ / Luna 🌙)
+    st.sidebar.markdown("### 🎨 Appearance Theme")
+    theme_mode = st.sidebar.radio("Select Theme:", ["☀️ Light Mode", "🌙 Dark Mode"], horizontal=True)
+
+    # Inyección de estilos CSS dinámicos según el tema elegido
+    if "Light" in theme_mode:
+        st.markdown("""
+            <style>
+                .stApp {
+                    background-color: #FFFFFF;
+                    color: #1E1E1E;
+                }
+            </style>
+        """, unsafe_allow_html=True)
+    else:
+        st.markdown("""
+            <style>
+                .stApp {
+                    background-color: #0E1117;
+                    color: #FAFAFA;
+                }
+            </style>
+        """, unsafe_allow_html=True)
+
     st.title("📰 News without ads")
     st.markdown("A high-speed, optimized space for reading global reference content—free from distractions and advertising.")
 
@@ -140,7 +159,6 @@ def main():
     
     sources_dict = CATEGORIES[selected_category]
     selected_source_name = st.sidebar.selectbox("Select the medium/source:", list(sources_dict.keys()))
-
     feed_url = sources_dict[selected_source_name]
 
     # Botón para limpiar caché y actualizar
@@ -153,46 +171,44 @@ def main():
     with st.spinner(f"Loading items from {selected_source_name}..."):
         raw_data = fetcher.fetch()
 
-    if raw_data:
-        feed = feedparser.parse(raw_data)
-        
-        st.markdown(f"### 📋 Recent Articles: {selected_source_name}")
+        if raw_data:
+            feed = feedparser.parse(raw_data)
+            st.markdown(f"### 📋 Recent Articles: {selected_source_name}")
 
-        for entry in feed.entries:
-            title = getattr(entry, 'title', 'Untitled')
-            published = getattr(entry, 'published', 'Date not available')
-            link = getattr(entry, 'link', '#')
-            summary = getattr(entry, 'summary', getattr(entry, 'description', ''))
-            
-            clean_summary = TextCleaner.remove_ads_and_banners(summary)
+            for entry in feed.entries:
+                title = getattr(entry, 'title', 'Untitled')
+                published = getattr(entry, 'published', 'Date not available')
+                link = getattr(entry, 'link', '#')
+                summary = getattr(entry, 'summary', getattr(entry, 'description', ''))
+                clean_summary = TextCleaner.remove_ads_and_banners(summary)
 
-            with st.expander(f"📌 {title}"):
-                st.caption(f"📅 Published: {published}")
-                
-                # Botón para cargar el artículo completo formateado en párrafos
-                if st.button(f"📥 Load full article", key=link):
-                    with st.spinner("Extracting full text and images..."):
-                        paragraphs_list, images = fetch_full_article(link)
-                        
-                        # Mostrar la imagen principal si se encontró
-                        for img_url in images:
-                            try:
-                                st.image(img_url, use_column_width=True)
-                            except Exception:
-                                pass
+                with st.expander(f"📌 {title}"):
+                    st.caption(f"📅 Published: {published}")
 
-                        # Renderizar cada párrafo por separado para mantener el formato visual
-                        if paragraphs_list:
-                            for p in paragraphs_list:
-                                st.write(p)
-                        else:
-                            st.write(clean_summary)
-                else:
-                    st.write(clean_summary if clean_summary else "Click 'Load full article' to see the full content.")
+                    # Botón para cargar el artículo completo formateado en párrafos
+                    if st.button(f"📥 Load full article", key=link):
+                        with st.spinner("Extracting full text and images..."):
+                            paragraphs_list, images = fetch_full_article(link)
 
-                st.markdown(f"[Read the article at the original source]({link})", unsafe_allow_html=True)
-    else:
-        st.error(f"Unable to connect to the {selected_source_name} feed. Check the link or your connection.")
+                            # Mostrar la imagen principal si se encontró
+                            for img_url in images:
+                                try:
+                                    st.image(img_url, use_column_width=True)
+                                except Exception:
+                                    pass
+
+                            # Renderizar cada párrafo por separado para mantener el formato visual
+                            if paragraphs_list:
+                                for p in paragraphs_list:
+                                    st.write(p)
+                            else:
+                                st.write(clean_summary)
+                    else:
+                        st.write(clean_summary if clean_summary else "Click 'Load full article' to see the full content.")
+
+                    st.markdown(f"[Read the article at the original source]({link})", unsafe_allow_html=True)
+        else:
+            st.error(f"Unable to connect to the {selected_source_name} feed. Check the link or your connection.")
 
 if __name__ == "__main__":
     main()
