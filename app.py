@@ -56,8 +56,6 @@ CATEGORIES = {
         "Eurogamer": "https://www.eurogamer.net/feed",
         "Kotaku": "https://kotaku.com/rss",
         "Destructoid": "https://www.destructoid.com/feed/",
-        "Nintendo Life": "https://www.nintendolife.com/feeds/latest",
-        "Push Square": "https://www.pushsquare.com/feeds/latest"
     }
 }
 
