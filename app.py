@@ -36,7 +36,7 @@ CATEGORIES = {
     },
     "Ciencia y Salud": {
         "Nature": "https://www.nature.com/nature.rss",
-        "Scientific American": "https://rss.sciam.com/ScientificAmerican-Global",
+        "Live Science": "https://www.livescience.com/feeds/all",
         "New Scientist": "https://www.newscientist.com/feed/home/"
     },
     "Deportes": {
