@@ -21,9 +21,12 @@ CATEGORIES = {
         "Ars Technica": "https://feeds.arstechnica.com/arstechnica/index"
     },
     "Finanzas y Economía": {
-        "Bloomberg": "https://feeds.bloomberg.com/markets/news.rss",
+        "Yahoo Finance": "https://finance.yahoo.com/news/rssindex",
+        "Investing.com": "https://www.investing.com/rss/news_25.rss",
         "CNBC Markets": "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=15838421",
-        "MarketWatch": "https://feeds.marketwatch.com/marketwatch/topstories/"
+        "CoinDesk": "https://www.coindesk.com/arc/outboundfeeds/rss/",
+        "Benzinga": "https://www.benzinga.com/feed",
+        "Business Insider (Markets)": "https://markets.businessinsider.com/rss/news"
     },
     "Política": {
         "BBC News (World)": "https://feeds.bbci.co.uk/news/world/rss.xml",
