@@ -27,12 +27,7 @@ CATEGORIES = {
         "PR Newswire": "https://www.prnewswire.com/rss/financial-services-latest-news/financial-services-latest-news-list.rss",
         "Reuters Business": "https://www.reutersagency.com/feed/?best-regions=americas&post_type=best",
         "AP News Business": "https://news.google.com/rss/search?q=when:24h+site:apnews.com/hub/business&hl=en-US&gl=US&ceid=US:en",
-        "SEC News": "https://www.sec.gov/news/pressreleases.rss",
-        "GlobeNewswire": "https://www.globenewswire.com/Rss/Feed/financial-services",
-        "Business Wire": "https://feed.businesswire.com/rss/home/?rss=G1QcFxgWVR8WEx52Ww==",
-        "Yahoo Finance Top": "https://finance.yahoo.com/news/rssindex",
-        "Investing General": "https://www.investing.com/rss/news.rss",
-        "Globe and Mail Business": "https://www.theglobeandmail.com/arc/outboundfeeds/rss/category/business/"
+        "SEC News": "https://www.sec.gov/news/pressreleases.rss"
     },
     "Política": {
         "BBC News (World)": "https://feeds.bbci.co.uk/news/world/rss.xml",
