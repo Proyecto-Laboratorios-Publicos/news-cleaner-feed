@@ -126,7 +126,7 @@ def fetch_full_article(url: str):
         return [], []
 
 def main():
-    st.title("📰 Agregador de Noticias sin Anuncios")
+    st.title("📰 News without ads")
     st.markdown("Un espacio optimizado de alta velocidad para leer contenido global de referencia sin distracciones ni publicidad.")
 
     # Panel lateral para seleccionar la categoría y el diario específico
