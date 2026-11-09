@@ -22,7 +22,25 @@ CATEGORIES = {
     },
     "Finanzas y Economía": {
         "CNBC Markets": "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=15838421",
-        "Business Insider (Markets)": "https://markets.businessinsider.com/rss/news"
+        "Business Insider (Markets)": "https://markets.businessinsider.com/rss/news",
+        "Yahoo Finance": "https://finance.yahoo.com/news/rssindex",
+        "Investing.com": "https://www.investing.com/rss/news_25.rss",
+        "CoinDesk": "https://www.coindesk.com/arc/outboundfeeds/rss/",
+        "Benzinga": "https://www.benzinga.com/feed",
+        "MarketWatch": "https://feeds.marketwatch.com/marketwatch/topstories/",
+        "Financial Post": "https://financialpost.com/feed/",
+        "The Motley Fool": "https://www.fool.com/feed/",
+        "Fortune (Finance)": "https://fortune.com/feed/fortune-feed/",
+        "Forbes (Money)": "https://www.forbes.com/innovation/feed/",
+        "Kitco News": "https://www.kitco.com/rss/net/kitconews.xml",
+        "FXStreet": "https://www.fxstreet.com/rss",
+        "Zacks": "https://www.zacks.com/rss/zacks_news.rss",
+        "Seeking Alpha": "https://seekingalpha.com/market_currents.xml",
+        "Globe and Mail": "https://www.theglobeandmail.com/arc/outboundfeeds/rss/category/investing/",
+        "PR Newswire": "https://www.prnewswire.com/rss/financial-services-latest-news/financial-services-latest-news-list.rss",
+        "The Street": "https://www.thestreet.com/.rss/full",
+        "Morningstar": "https://www.morningstar.com/rss/latest-news",
+        "TipRanks": "https://www.tipranks.com/feed"
     },
     "Política": {
         "BBC News (World)": "https://feeds.bbci.co.uk/news/world/rss.xml",
