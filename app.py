@@ -14,20 +14,20 @@ st.set_page_config(
 
 # Diccionario maestro ampliado con los mejores diarios globales por categoría
 CATEGORIES = {
-    "Tecnología": {
+    "Technology": {
         "TechCrunch": "https://techcrunch.com/feed/",
         "The Verge": "https://www.theverge.com/rss/index.xml",
         "Wired": "https://www.wired.com/feed/rss",
         "Ars Technica": "https://feeds.arstechnica.com/arstechnica/index"
     },
-    "Finanzas y Economía": {
+    "Finance and Economics": {
         "CNBC Markets": "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=15838421",
         "Business Insider (Markets)": "https://markets.businessinsider.com/rss/news",
         "Seeking Alpha": "https://seekingalpha.com/market_currents.xml",
         "PR Newswire": "https://www.prnewswire.com/rss/financial-services-latest-news/financial-services-latest-news-list.rss",
         "SEC News": "https://www.sec.gov/news/pressreleases.rss"
     },
-    "Política": {
+    "Policy": {
         "BBC News (World)": "https://feeds.bbci.co.uk/news/world/rss.xml",
         "The Guardian": "https://www.theguardian.com/world/rss",
         "Al Jazeera English": "https://www.aljazeera.com/xml/rss/all.xml",
@@ -38,7 +38,7 @@ CATEGORIES = {
         "RFI": "https://www.rfi.fr/en/rss",
         "The Diplomat": "https://thediplomat.com/feed/"
     },
-    "Espectáculos": {
+    "Entertainment": {
         "Variety": "https://variety.com/feed/",
         "The Hollywood Reporter": "https://www.hollywoodreporter.com/feed/",
         "Deadline": "https://deadline.com/feed/",
@@ -48,14 +48,14 @@ CATEGORIES = {
         "Billboard": "https://www.billboard.com/feed/",
         "E! Online": "https://www.eonline.com/syndication/feeds/rss/topstories.xml"
     },
-    "Ciencia y Salud": {
+    "Science and Health": {
         "Nature": "https://www.nature.com/nature.rss",
         "Live Science": "https://www.livescience.com/feeds/all",
         "New Scientist": "https://www.newscientist.com/feed/home/",
         "MIT Technology Review": "https://www.technologyreview.com/feed/",
         "ScienceDaily": "https://www.sciencedaily.com/rss/top/science.xml",
     },
-    "Deportes": {
+    "Sports": {
         "BBC Sport": "https://feeds.bbci.co.uk/sport/rss.xml",
         "Marca": "https://e00-marca.uecdn.es/rss/portada.xml",
         "TalkSport": "https://talksport.com/feed/",
@@ -64,14 +64,14 @@ CATEGORIES = {
         "France 24 Sport": "https://www.france24.com/en/sport/rss",
         "The Guardian Sport": "https://www.theguardian.com/sport/rss"
     },
-    "Cultura": {
+    "Culture": {
         "The Guardian (Culture)": "https://www.theguardian.com/culture/rss",
         "Smithsonian Magazine": "https://www.smithsonianmag.com/rss/arts-culture/",
         "Hyperallergic": "https://hyperallergic.com/feed/",
         "ARTnews": "https://www.artnews.com/feed/",
         "Open Culture": "https://www.openculture.com/feed",
     },
-    "Videojuegos / Gaming": {
+    "Gaming": {
         "IGN": "https://feeds.ign.com/ign/all",
         "Polygon": "https://www.polygon.com/rss/index.xml",
         "PC Gamer": "https://www.pcgamer.com/rss/",
@@ -127,46 +127,46 @@ def fetch_full_article(url: str):
 
 def main():
     st.title("📰 News without ads")
-    st.markdown("Un espacio optimizado de alta velocidad para leer contenido global de referencia sin distracciones ni publicidad.")
+    st.markdown("A high-speed, optimized space for reading global reference content—free from distractions and advertising.")
 
     # Panel lateral para seleccionar la categoría y el diario específico
-    st.sidebar.header("Panel de Navegación")
-    selected_category = st.sidebar.selectbox("Seleccioná una categoría:", list(CATEGORIES.keys()))
+    st.sidebar.header("Navigation Panel")
+    selected_category = st.sidebar.selectbox("Select a category:", list(CATEGORIES.keys()))
     
     sources_dict = CATEGORIES[selected_category]
-    selected_source_name = st.sidebar.selectbox("Seleccioná el medio/fuente:", list(sources_dict.keys()))
+    selected_source_name = st.sidebar.selectbox("Select the medium/source:", list(sources_dict.keys()))
 
     feed_url = sources_dict[selected_source_name]
 
     # Botón para limpiar caché y actualizar
-    if st.sidebar.button("Actualizar Feed"):
+    if st.sidebar.button("Update Feed"):
         st.cache_data.clear()
 
     # Instanciamos el conector RSS optimizado
     fetcher = RSSFetcher(source_name=selected_source_name, endpoint_url=feed_url)
 
-    with st.spinner(f"Cargando artículos de {selected_source_name}..."):
+    with st.spinner(f"Loading items from {selected_source_name}..."):
         raw_data = fetcher.fetch()
 
     if raw_data:
         feed = feedparser.parse(raw_data)
         
-        st.markdown(f"### 📋 Artículos Recientes: {selected_source_name}")
+        st.markdown(f"### 📋 Recent Articles: {selected_source_name}")
 
         for entry in feed.entries:
-            title = getattr(entry, 'title', 'Sin título')
-            published = getattr(entry, 'published', 'Fecha no disponible')
+            title = getattr(entry, 'title', 'Untitled')
+            published = getattr(entry, 'published', 'Date not available')
             link = getattr(entry, 'link', '#')
             summary = getattr(entry, 'summary', getattr(entry, 'description', ''))
             
             clean_summary = TextCleaner.remove_ads_and_banners(summary)
 
             with st.expander(f"📌 {title}"):
-                st.caption(f"📅 Publicado: {published}")
+                st.caption(f"📅 Published: {published}")
                 
                 # Botón para cargar el artículo completo formateado en párrafos
-                if st.button(f"📥 Cargar artículo completo", key=link):
-                    with st.spinner("Extrayendo texto completo e imágenes..."):
+                if st.button(f"📥 Load full article", key=link):
+                    with st.spinner("Extracting full text and images..."):
                         paragraphs_list, images = fetch_full_article(link)
                         
                         # Mostrar la imagen principal si se encontró
@@ -183,11 +183,11 @@ def main():
                         else:
                             st.write(clean_summary)
                 else:
-                    st.write(clean_summary if clean_summary else "Hacé clic en 'Cargar artículo completo' para ver el desarrollo.")
+                    st.write(clean_summary if clean_summary else "Click 'Load full article' to see the full content.")
 
-                st.markdown(f"[Leer artículo en la fuente original]({link})", unsafe_allow_html=True)
+                st.markdown(f"[Read the article at the original source]({link})", unsafe_allow_html=True)
     else:
-        st.error(f"No se pudo conectar con el feed de {selected_source_name}. Verificá el enlace o tu conexión.")
+        st.error(f"Unable to connect to the {selected_source_name} feed. Check the link or your connection.")
 
 if __name__ == "__main__":
     main()
