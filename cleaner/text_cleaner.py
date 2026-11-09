@@ -1,23 +1,25 @@
 import re
-from bs4ounded import BeautifulSoup if 'BeautifulSoup' in globals() else None
+from bs4 import BeautifulSoup
 
 class TextCleaner:
     """
-    Módulo encargado de limpiar el contenido de las noticias,
-    eliminando etiquetas no deseadas, scripts, banners y publicidad.
+    Módulo encargado de limpiar el contenido de las noticias, eliminando etiquetas no deseadas, scripts, banners y publicidad.
     """
+    
     @staticmethod
     def remove_ads_and_banners(raw_html: str) -> str:
         if not raw_html:
             return ""
+            
+        # Usamos BeautifulSoup para parsear el contenido XML/HTML de forma robusta
+        soup = BeautifulSoup(raw_html, 'html.parser')
         
-        # Limpieza básica de etiquetas usando expresiones regulares 
-        # (o BeautifulSoup si se agrega en las dependencias)
-        clean_text = re.sub(r'<script.*?</script>', '', raw_html, flags=re.DOTALL)
-        clean_text = re.sub(r'<style.*?</style>', '', clean_text, flags=re.DOTALL)
-        
-        # Remover tags HTML genéricos para dejar texto plano legible
-        clean_text = re.sub(r'<[^>]+>', '', clean_text)
+        # Eliminar etiquetas de scripts y estilos por completo
+        for element in soup(["script", "style"]):
+            element.decompose()
+            
+        # Extraer el texto plano ya limpio de tags y banners
+        clean_text = soup.get_text()
         
         # Normalizar espacios en blanco y saltos de línea excesivos
         clean_text = re.sub(r'\s+', ' ', clean_text).strip()
