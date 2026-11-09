@@ -55,14 +55,13 @@ def main():
     # Instanciamos el conector RSS optimizado
     fetcher = RSSFetcher(source_name=selected_source_name, endpoint_url=feed_url)
 
-    with st.spinner(f"Descargando y parseando feed de {selected_source_name}..."):
+    with st.spinner(f"Cargando artículos de {selected_source_name}..."):
         raw_data = fetcher.fetch()
 
     if raw_data:
-        # Usamos feedparser para estructurar las noticias en formato de tarjetas individuales
+        # Usamos feedparser para estructurar las noticias
         feed = feedparser.parse(raw_data)
         
-        st.success(f"¡Se encontraron {len(feed.entries)} artículos en {selected_source_name}!")
         st.markdown(f"### 📋 Artículos Recientes: {selected_source_name}")
 
         # Recorremos cada entrada del RSS y la mostramos como una tarjeta limpia
@@ -70,14 +69,26 @@ def main():
             title = getattr(entry, 'title', 'Sin título')
             published = getattr(entry, 'published', 'Fecha no disponible')
             link = getattr(entry, 'link', '#')
-            summary_raw = getattr(entry, 'summary', getattr(entry, 'description', ''))
             
-            # Limpiamos el resumen de HTML con nuestro TextCleaner
-            clean_summary = TextCleaner.remove_ads_and_banners(summary_raw)
+            # Buscamos contenido extendido (content o summary/description)
+            content_raw = ""
+            if hasattr(entry, 'content') and entry.content:
+                content_raw = entry.content[0].get('value', '')
+            else:
+                content_raw = getattr(entry, 'summary', getattr(entry, 'description', ''))
+            
+            # Limpiamos anuncios, scripts y estilos del contenido completo
+            clean_content = TextCleaner.remove_ads_and_banners(content_raw)
 
             with st.expander(f"📌 {title}"):
                 st.caption(f"📅 Publicado: {published}")
-                st.write(clean_summary if clean_summary else "No hay descripción disponible.")
+                
+                # Intentamos mostrar el texto completo o el resumen extendido limpio
+                if clean_content:
+                    st.write(clean_content)
+                else:
+                    st.write("No hay descripción detallada disponible para este artículo.")
+                
                 st.markdown(f"[Leer artículo completo en la fuente original]({link})", unsafe_allow_html=True)
     else:
         st.error(f"No se pudo conectar con el feed de {selected_source_name}. Verificá el enlace o tu conexión.")
