@@ -44,7 +44,11 @@ CATEGORIES = {
     },
     "Cultura": {
         "The Guardian (Culture)": "https://www.theguardian.com/culture/rss",
-        "BBC Culture": "https://feeds.bbci.co.uk/culture/rss.xml"
+        "Smithsonian Magazine": "https://www.smithsonianmag.com/rss/arts-culture/",
+        "Hyperallergic": "https://hyperallergic.com/feed/",
+        "ARTnews": "https://www.artnews.com/feed/",
+        "Open Culture": "https://www.openculture.com/feed",
+        "Los Angeles Review of Books": "https://lareviewofbooks.org/feed/"
     },
     "Videojuegos / Gaming": {
         "IGN": "https://feeds.ign.com/ign/all",
