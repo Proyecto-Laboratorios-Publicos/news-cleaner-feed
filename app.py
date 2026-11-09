@@ -24,17 +24,7 @@ CATEGORIES = {
         "CNBC Markets": "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=15838421",
         "Business Insider (Markets)": "https://markets.businessinsider.com/rss/news",
         "Seeking Alpha": "https://seekingalpha.com/market_currents.xml",
-        "PR Newswire": "https://www.prnewswire.com/rss/financial-services-latest-news/financial-services-latest-news-list.rss",
-        "Financial Post": "https://financialpost.com/feed/",
-        "The Motley Fool": "https://www.fool.com/feed/",
-        "Fortune (Finance)": "https://fortune.com/feed/fortune-feed/",
-        "Forbes (Money)": "https://www.forbes.com/innovation/feed/",
-        "Kitco News": "https://www.kitco.com/rss/net/kitconews.xml",
-        "FXStreet": "https://www.fxstreet.com/rss",
-        "Zacks": "https://www.zacks.com/rss/zacks_news.rss",
-        "Globe and Mail": "https://www.theglobeandmail.com/arc/outboundfeeds/rss/category/investing/",
-        "The Street": "https://www.thestreet.com/.rss/full",
-        "TipRanks": "https://www.tipranks.com/feed"
+        "PR Newswire": "https://www.prnewswire.com/rss/financial-services-latest-news/financial-services-latest-news-list.rss"
     },
     "Política": {
         "BBC News (World)": "https://feeds.bbci.co.uk/news/world/rss.xml",
