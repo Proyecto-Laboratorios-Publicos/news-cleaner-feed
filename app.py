@@ -37,10 +37,7 @@ CATEGORIES = {
         "Zacks": "https://www.zacks.com/rss/zacks_news.rss",
         "Seeking Alpha": "https://seekingalpha.com/market_currents.xml",
         "Globe and Mail": "https://www.theglobeandmail.com/arc/outboundfeeds/rss/category/investing/",
-        "PR Newswire": "https://www.prnewswire.com/rss/financial-services-latest-news/financial-services-latest-news-list.rss",
-        "The Street": "https://www.thestreet.com/.rss/full",
-        "Morningstar": "https://www.morningstar.com/rss/latest-news",
-        "TipRanks": "https://www.tipranks.com/feed"
+        "PR Newswire": "https://www.prnewswire.com/rss/financial-services-latest-news/financial-services-latest-news-list.rss"
     },
     "Política": {
         "BBC News (World)": "https://feeds.bbci.co.uk/news/world/rss.xml",
