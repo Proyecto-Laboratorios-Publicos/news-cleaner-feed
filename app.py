@@ -28,7 +28,6 @@ CATEGORIES = {
         "BBC News (World)": "https://feeds.bbci.co.uk/news/world/rss.xml",
         "The Guardian": "https://www.theguardian.com/world/rss",
         "Al Jazeera English": "https://www.aljazeera.com/xml/rss/all.xml",
-        "DW (Politics)": "https://rss.dw.com/rdf/rss-en-pol",
         "France 24": "https://www.france24.com/en/rss",
         "UN News": "https://news.un.org/feed/subscribe/en/news/all/rss.xml",
         "Euronews": "https://www.euronews.com/rss?format=mrss",
