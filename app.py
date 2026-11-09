@@ -21,11 +21,7 @@ CATEGORIES = {
         "Ars Technica": "https://feeds.arstechnica.com/arstechnica/index"
     },
     "Finanzas y Economía": {
-        "Yahoo Finance": "https://finance.yahoo.com/news/rssindex",
-        "Investing.com": "https://www.investing.com/rss/news_25.rss",
         "CNBC Markets": "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=15838421",
-        "CoinDesk": "https://www.coindesk.com/arc/outboundfeeds/rss/",
-        "Benzinga": "https://www.benzinga.com/feed",
         "Business Insider (Markets)": "https://markets.businessinsider.com/rss/news"
     },
     "Política": {
