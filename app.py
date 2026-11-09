@@ -24,7 +24,15 @@ CATEGORIES = {
         "CNBC Markets": "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=15838421",
         "Business Insider (Markets)": "https://markets.businessinsider.com/rss/news",
         "Seeking Alpha": "https://seekingalpha.com/market_currents.xml",
-        "PR Newswire": "https://www.prnewswire.com/rss/financial-services-latest-news/financial-services-latest-news-list.rss"
+        "PR Newswire": "https://www.prnewswire.com/rss/financial-services-latest-news/financial-services-latest-news-list.rss",
+        "Reuters Business": "https://www.reutersagency.com/feed/?best-regions=americas&post_type=best",
+        "AP News Business": "https://news.google.com/rss/search?q=when:24h+site:apnews.com/hub/business&hl=en-US&gl=US&ceid=US:en",
+        "SEC News": "https://www.sec.gov/news/pressreleases.rss",
+        "GlobeNewswire": "https://www.globenewswire.com/Rss/Feed/financial-services",
+        "Business Wire": "https://feed.businesswire.com/rss/home/?rss=G1QcFxgWVR8WEx52Ww==",
+        "Yahoo Finance Top": "https://finance.yahoo.com/news/rssindex",
+        "Investing General": "https://www.investing.com/rss/news.rss",
+        "Globe and Mail Business": "https://www.theglobeandmail.com/arc/outboundfeeds/rss/category/business/"
     },
     "Política": {
         "BBC News (World)": "https://feeds.bbci.co.uk/news/world/rss.xml",
