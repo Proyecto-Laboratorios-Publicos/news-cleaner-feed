@@ -49,11 +49,8 @@ CATEGORIES = {
         "Nature": "https://www.nature.com/nature.rss",
         "Live Science": "https://www.livescience.com/feeds/all",
         "New Scientist": "https://www.newscientist.com/feed/home/",
-        "Scientific American": "https://rss.sciam.com/ScientificAmerican-Global",
         "MIT Technology Review": "https://www.technologyreview.com/feed/",
         "ScienceDaily": "https://www.sciencedaily.com/rss/top/science.xml",
-        "Phys.org": "https://phys.org/rss-feed/",
-        "EurekAlert!": "https://www.eurekalert.org/rss/technology_engineering.xml"
     },
     "Deportes": {
         "BBC Sport": "https://feeds.bbci.co.uk/sport/rss.xml",
