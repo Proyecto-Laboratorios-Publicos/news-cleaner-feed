@@ -1,4 +1,5 @@
 import streamlit as st
+import feedparser
 from fetchers.rss_fetcher import RSSFetcher
 from cleaner.text_cleaner import TextCleaner
 
@@ -42,7 +43,6 @@ def main():
     st.sidebar.header("Panel de Navegación")
     selected_category = st.sidebar.selectbox("Seleccioná una categoría:", list(CATEGORIES.keys()))
     
-    # Sub-selector dinámico para elegir el diario de esa categoría
     sources_dict = CATEGORIES[selected_category]
     selected_source_name = st.sidebar.selectbox("Seleccioná el medio/fuente:", list(sources_dict.keys()))
 
@@ -55,19 +55,30 @@ def main():
     # Instanciamos el conector RSS optimizado
     fetcher = RSSFetcher(source_name=selected_source_name, endpoint_url=feed_url)
 
-    with st.spinner(f"Descargando feed de {selected_source_name}..."):
+    with st.spinner(f"Descargando y parseando feed de {selected_source_name}..."):
         raw_data = fetcher.fetch()
 
     if raw_data:
-        # Limpieza quirúrgica mediante BeautifulSoup
-        cleaned_content = TextCleaner.remove_ads_and_banners(raw_data)
+        # Usamos feedparser para estructurar las noticias en formato de tarjetas individuales
+        feed = feedparser.parse(raw_data)
+        
+        st.success(f"¡Se encontraron {len(feed.entries)} artículos en {selected_source_name}!")
+        st.markdown(f"### 📋 Artículos Recientes: {selected_source_name}")
 
-        st.success(f"¡Contenido de {selected_source_name} obtenido y optimizado con éxito!")
-        
-        st.markdown(f"### 📋 Vista Limpia: {selected_source_name}")
-        
-        # Despliegue del texto limpio
-        st.text_area("Contenido procesado:", cleaned_content, height=500)
+        # Recorremos cada entrada del RSS y la mostramos como una tarjeta limpia
+        for entry in feed.entries:
+            title = getattr(entry, 'title', 'Sin título')
+            published = getattr(entry, 'published', 'Fecha no disponible')
+            link = getattr(entry, 'link', '#')
+            summary_raw = getattr(entry, 'summary', getattr(entry, 'description', ''))
+            
+            # Limpiamos el resumen de HTML con nuestro TextCleaner
+            clean_summary = TextCleaner.remove_ads_and_banners(summary_raw)
+
+            with st.expander(f"📌 {title}"):
+                st.caption(f"📅 Publicado: {published}")
+                st.write(clean_summary if clean_summary else "No hay descripción disponible.")
+                st.markdown(f"[Leer artículo completo en la fuente original]({link})", unsafe_allow_html=True)
     else:
         st.error(f"No se pudo conectar con el feed de {selected_source_name}. Verificá el enlace o tu conexión.")
 
