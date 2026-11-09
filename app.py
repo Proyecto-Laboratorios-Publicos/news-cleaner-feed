@@ -27,7 +27,7 @@ CATEGORIES = {
     },
     "Política": {
         "BBC News (World)": "https://feeds.bbci.co.uk/news/world/rss.xml",
-        "AP News": "https://rsshub.app/apnews/topics/ap-top-news", # O el feed oficial estático de AP
+        "Politico": "https://www.politico.com/rss/politics08.xml",
         "The Guardian": "https://www.theguardian.com/world/rss"
     },
     "Espectáculos": {
