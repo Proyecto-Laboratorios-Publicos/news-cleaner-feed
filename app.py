@@ -18,7 +18,17 @@ CATEGORIES = {
         "TechCrunch": "https://techcrunch.com/feed/",
         "The Verge": "https://www.theverge.com/rss/index.xml",
         "Wired": "https://www.wired.com/feed/rss",
-        "Ars Technica": "https://feeds.arstechnica.com/arstechnica/index"
+        "Ars Technica": "https://feeds.arstechnica.com/arstechnica/index",
+        "VentureBeat": "https://venturebeat.com/feed/",
+        "Engadget": "https://www.engadget.com/rss.xml",
+        "Gizmodo": "https://gizmodo.com/feed",
+        "ZDNET": "https://www.zdnet.com/news.rss",
+        "The Next Web": "https://thenextweb.com/feed",
+        "BleepingComputer": "https://www.bleepingcomputer.com/feed/",
+        "Hacker News": "https://news.ycombinator.com/rss",
+        "MIT News Computing": "https://news.mit.edu/rss/topic/computing",
+        "Linux Today": "https://www.linuxtoday.com/feed/ネルギー",
+        "Slashdot": "http://rss.slashdot.org/Slashdot/slashdotMain"
     },
     "Finance and Economics": {
         "CNBC Markets": "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=15838421",
