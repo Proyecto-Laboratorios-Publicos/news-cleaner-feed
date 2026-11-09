@@ -9,54 +9,67 @@ st.set_page_config(
     layout="wide"
 )
 
-# Diccionario maestro de categorías y feeds RSS
+# Diccionario optimizado con los mejores diarios globales de referencia por categoría (Feeds RSS directos)
 CATEGORIES = {
     "Tecnología": {
-        "url": "https://news.google.com/rss/search?q=tecnologia&hl=es-419&gl=AR&ceid=AR:es-419"
+        "TechCrunch": "https://techcrunch.com/feed/",
+        "The Verge": "https://www.theverge.com/rss/index.xml",
+        "Wired": "https://www.wired.com/feed/rss",
+        "Ars Technica": "https://feeds.arstechnica.com/arstechnica/index"
     },
     "Finanzas y Economía": {
-        "url": "https://news.google.com/rss/search?q=economia+finanzas&hl=es-419&gl=AR&ceid=AR:es-419"
+        "Financial Times": "https://www.ft.com/news-feed?format=rss",
+        "CNBC Markets": "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=15838421",
+        "MarketWatch": "https://feeds.marketwatch.com/marketwatch/topstories/"
     },
     "Política": {
-        "url": "https://news.google.com/rss/search?q=politica+argentina&hl=es-419&gl=AR&ceid=AR:es-419"
+        "BBC News (World)": "https://feeds.bbci.co.uk/news/world/rss.xml",
+        "Reuters": "https://www.reutersagency.com/feed/?best-regions=global&post_type=best",
+        "The Guardian": "https://www.theguardian.com/world/rss"
     },
     "Espectáculos": {
-        "url": "https://news.google.com/rss/search?q=espectaculos+cine+musica&hl=es-419&gl=AR&ceid=AR:es-419"
+        "Variety": "https://variety.com/feed/",
+        "The Hollywood Reporter": "https://www.hollywoodreporter.com/feed/",
+        "Deadline": "https://deadline.com/feed/"
     }
 }
 
 def main():
     st.title("📰 Agregador de Noticias sin Anuncios")
-    st.markdown("Un espacio limpio para leer contenido actualizado sin distracciones, banners ni publicidad.")
+    st.markdown("Un espacio optimizado de alta velocidad para leer contenido global de referencia sin distracciones ni publicidad.")
 
-    # Panel lateral para seleccionar la categoría
+    # Panel lateral para seleccionar la categoría y el diario específico
     st.sidebar.header("Panel de Navegación")
-    selected_category = st.sidebar.radio("Seleccioná una categoría:", list(CATEGORIES.keys()))
+    selected_category = st.sidebar.selectbox("Seleccioná una categoría:", list(CATEGORIES.keys()))
+    
+    # Sub-selector dinámico para elegir el diario de esa categoría
+    sources_dict = CATEGORIES[selected_category]
+    selected_source_name = st.sidebar.selectbox("Seleccioná el medio/fuente:", list(sources_dict.keys()))
 
-    # Botón para actualizar / consultar el feed
+    feed_url = sources_dict[selected_source_name]
+
+    # Botón para limpiar caché y actualizar
     if st.sidebar.button("Actualizar Feed"):
         st.cache_data.clear()
 
-    feed_url = CATEGORIES[selected_category]["url"]
+    # Instanciamos el conector RSS optimizado
+    fetcher = RSSFetcher(source_name=selected_source_name, endpoint_url=feed_url)
 
-    # Instanciamos el conector que ya tenemos probado
-    fetcher = RSSFetcher(source_name=selected_category, endpoint_url=feed_url)
-
-    with st.spinner(f"Conectando y descargando noticias de {selected_category}..."):
+    with st.spinner(f"Descargando feed de {selected_source_name}..."):
         raw_data = fetcher.fetch()
 
     if raw_data:
-        # Limpiamos el contenido utilizando nuestra clase robusta con BeautifulSoup
+        # Limpieza quirúrgica mediante BeautifulSoup
         cleaned_content = TextCleaner.remove_ads_and_banners(raw_data)
 
-        st.success(f"¡Contenido de {selected_category} obtenido y optimizado con éxito!")
+        st.success(f"¡Contenido de {selected_source_name} obtenido y optimizado con éxito!")
         
-        st.markdown("### 📋 Vista Limpia del Feed")
+        st.markdown(f"### 📋 Vista Limpia: {selected_source_name}")
         
-        # Mostramos el contenido limpio en un contenedor expandible o caja de texto estilizada
-        st.text_area("Contenido procesado:", cleaned_content, height=450)
+        # Despliegue del texto limpio
+        st.text_area("Contenido procesado:", cleaned_content, height=500)
     else:
-        st.error("No se pudo conectar con el feed RSS seleccionado. Verificá tu conexión a internet.")
+        st.error(f"No se pudo conectar con el feed de {selected_source_name}. Verificá el enlace o tu conexión.")
 
 if __name__ == "__main__":
     main()
