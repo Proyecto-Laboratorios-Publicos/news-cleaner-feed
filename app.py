@@ -51,8 +51,13 @@ CATEGORIES = {
     },
     "Videojuegos / Gaming": {
         "IGN": "https://feeds.ign.com/ign/all",
-        "GameSpot": "https://www.gamespot.com/feeds/mashup/",
-        "Polygon": "https://www.polygon.com/rss/index.xml"
+        "Polygon": "https://www.polygon.com/rss/index.xml",
+        "PC Gamer": "https://www.pcgamer.com/rss/",
+        "Eurogamer": "https://www.eurogamer.net/feed",
+        "Kotaku": "https://kotaku.com/rss",
+        "Destructoid": "https://www.destructoid.com/feed/",
+        "Nintendo Life": "https://www.nintendolife.com/feeds/latest",
+        "Push Square": "https://www.pushsquare.com/feeds/latest"
     }
 }
 
