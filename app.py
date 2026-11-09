@@ -23,13 +23,6 @@ CATEGORIES = {
     "Finanzas y Economía": {
         "CNBC Markets": "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=15838421",
         "Business Insider (Markets)": "https://markets.businessinsider.com/rss/news",
-        "Yahoo Finance": "https://finance.yahoo.com/news/rssindex",
-        "Investing.com": "https://www.investing.com/rss/news_25.rss",
-        "CoinDesk": "https://www.coindesk.com/arc/outboundfeeds/rss/",
-        "Benzinga": "https://www.benzinga.com/feed",
-        "MarketWatch": "https://feeds.marketwatch.com/marketwatch/topstories/",
-        "Financial Post": "https://financialpost.com/feed/",
-        "The Motley Fool": "https://www.fool.com/feed/",
         "Seeking Alpha": "https://seekingalpha.com/market_currents.xml",
         "PR Newswire": "https://www.prnewswire.com/rss/financial-services-latest-news/financial-services-latest-news-list.rss"
     },
