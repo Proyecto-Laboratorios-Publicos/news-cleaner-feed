@@ -19,7 +19,6 @@ CATEGORIES = {
         "The Verge": "https://www.theverge.com/rss/index.xml",
         "Wired": "https://www.wired.com/feed/rss",
         "Ars Technica": "https://feeds.arstechnica.com/arstechnica/index",
-        "VentureBeat": "https://venturebeat.com/feed/",
         "Engadget": "https://www.engadget.com/rss.xml",
         "The Next Web": "https://thenextweb.com/feed",
         "BleepingComputer": "https://www.bleepingcomputer.com/feed/",
