@@ -40,22 +40,22 @@ CATEGORIES = {
 @st.cache_data(ttl=3600)
 def fetch_full_article(url: str):
     """
-    Función optimizada para extraer la imagen principal y todo el texto real del artículo 
-    recolectando y filtrando los párrafos de la página de origen.
+    Función optimizada para extraer la imagen principal y una lista ordenada 
+    de párrafos limpios del artículo de origen.
     """
     try:
         headers = {'User-Agent': 'Mozilla/5.0 (Compatible; NewsCleanerBot/1.0)'}
         response = requests.get(url, headers=headers, timeout=10)
         if response.status_code != 200:
-            return "", []
+            return [], []
 
         soup = BeautifulSoup(response.text, 'html.parser')
 
-        # Eliminar elementos molestos comunes (anuncios, navegación, scripts, footers, etc.)
+        # Eliminar elementos molestos comunes
         for tag in soup(["script", "style", "nav", "footer", "header", "aside", "form", "iframe", "noscript"]):
             tag.decompose()
 
-        # Extraer la imagen principal (Open Graph o la primera imagen útil)
+        # Extraer la imagen principal
         images = []
         og_image = soup.find("meta", property="og:image")
         if og_image and og_image.get("content"):
@@ -65,24 +65,22 @@ def fetch_full_article(url: str):
             if img_tag and img_tag.get("src"):
                 images.append(img_tag["src"])
 
-        # Extracción robusta: Buscar todos los párrafos del documento que tengan longitud de texto real
+        # Recolectar párrafos conservando la estructura individual
         paragraphs = soup.find_all('p')
+        clean_paragraphs = []
         
-        valid_paragraphs = []
         for p in paragraphs:
             text = p.get_text().strip()
-            # Filtramos párrafos cortos de navegación, fechas o avisos publicitarios y nos quedamos con el contenido
+            # Filtramos párrafos cortos o basura para quedarnos con el contenido real
             if len(text) > 40:
-                valid_paragraphs.append(text)
+                cleaned_p = TextCleaner.remove_ads_and_banners(text)
+                if cleaned_p:
+                    clean_paragraphs.append(cleaned_p)
 
-        full_text = "\n\n".join(valid_paragraphs)
-        
-        # Limpieza final de anuncios
-        clean_text = TextCleaner.remove_ads_and_banners(full_text)
-        return clean_text, images
+        return clean_paragraphs, images
 
     except Exception as e:
-        return "", []
+        return [], []
 
 def main():
     st.title("📰 Agregador de Noticias sin Anuncios")
