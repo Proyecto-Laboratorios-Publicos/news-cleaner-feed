@@ -21,7 +21,7 @@ CATEGORIES = {
         "Ars Technica": "https://feeds.arstechnica.com/arstechnica/index"
     },
     "Finanzas y Economía": {
-        "Financial Times": "https://www.ft.com/news-feed?format=rss",
+        "Bloomberg": "https://feeds.bloomberg.com/markets/news.rss",
         "CNBC Markets": "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=15838421",
         "MarketWatch": "https://feeds.marketwatch.com/marketwatch/topstories/"
     },
