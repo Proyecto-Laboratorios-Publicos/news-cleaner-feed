@@ -59,35 +59,46 @@ def main():
         raw_data = fetcher.fetch()
 
     if raw_data:
-        # Usamos feedparser para estructurar las noticias
         feed = feedparser.parse(raw_data)
         
         st.markdown(f"### 📋 Artículos Recientes: {selected_source_name}")
 
-        # Recorremos cada entrada del RSS y la mostramos como una tarjeta limpia
         for entry in feed.entries:
             title = getattr(entry, 'title', 'Sin título')
             published = getattr(entry, 'published', 'Fecha no disponible')
             link = getattr(entry, 'link', '#')
             
-            # Buscamos contenido extendido (content o summary/description)
+            # Buscamos el contenido más completo disponible (content[0] suele tener el artículo extendido)
             content_raw = ""
             if hasattr(entry, 'content') and entry.content:
                 content_raw = entry.content[0].get('value', '')
+            elif hasattr(entry, 'summary_detail'):
+                content_raw = entry.summary_detail.get('value', '')
             else:
                 content_raw = getattr(entry, 'summary', getattr(entry, 'description', ''))
             
-            # Limpiamos anuncios, scripts y estilos del contenido completo
+            # Limpiamos banners y anuncios conservando el formato útil
             clean_content = TextCleaner.remove_ads_and_banners(content_raw)
 
             with st.expander(f"📌 {title}"):
                 st.caption(f"📅 Publicado: {published}")
                 
-                # Intentamos mostrar el texto completo o el resumen extendido limpio
+                # Intentamos extraer y mostrar imágenes si vienen en los media_content o enclosures del RSS
+                if hasattr(entry, 'media_content') and entry.media_content:
+                    for media in entry.media_content:
+                        img_url = media.get('url')
+                        if img_url:
+                            st.image(img_url, use_column_width=True)
+                elif hasattr(entry, 'enclosures') and entry.enclosures:
+                    for enc in entry.enclosures:
+                        if 'image' in enc.get('type', ''):
+                            st.image(enc.get('href'), use_column_width=True)
+
+                # Mostramos el contenido enriquecido disponible
                 if clean_content:
                     st.write(clean_content)
                 else:
-                    st.write("No hay descripción detallada disponible para este artículo.")
+                    st.write("No hay contenido adicional disponible en el feed para este artículo.")
                 
                 st.markdown(f"[Leer artículo completo en la fuente original]({link})", unsafe_allow_html=True)
     else:
