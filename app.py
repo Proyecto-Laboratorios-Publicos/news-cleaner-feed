@@ -21,8 +21,6 @@ CATEGORIES = {
         "Ars Technica": "https://feeds.arstechnica.com/arstechnica/index",
         "VentureBeat": "https://venturebeat.com/feed/",
         "Engadget": "https://www.engadget.com/rss.xml",
-        "Gizmodo": "https://gizmodo.com/feed",
-        "ZDNET": "https://www.zdnet.com/news.rss",
         "The Next Web": "https://thenextweb.com/feed",
         "BleepingComputer": "https://www.bleepingcomputer.com/feed/",
         "MIT News Computing": "https://news.mit.edu/rss/topic/computing",
