@@ -36,7 +36,6 @@ CATEGORIES = {
         "FXStreet": "https://www.fxstreet.com/rss",
         "Zacks": "https://www.zacks.com/rss/zacks_news.rss",
         "Seeking Alpha": "https://seekingalpha.com/market_currents.xml",
-        "Globe and Mail": "https://www.theglobeandmail.com/arc/outboundfeeds/rss/category/investing/",
         "PR Newswire": "https://www.prnewswire.com/rss/financial-services-latest-news/financial-services-latest-news-list.rss"
     },
     "Política": {
