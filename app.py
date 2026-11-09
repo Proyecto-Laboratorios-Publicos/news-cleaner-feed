@@ -40,7 +40,6 @@ CATEGORIES = {
     },
     "Deportes": {
         "BBC Sport": "https://feeds.bbci.co.uk/sport/rss.xml",
-        "Sky Sports": "https://www.skysports.com/core/news/12040/1/rss",
         "Marca": "https://e00-marca.uecdn.es/rss/portada.xml",
         "CBC Sports": "https://www.cbc.ca/webfeed/rss/sports",
         "Bleacher Report": "https://bleacherreport.com/articles/feed"
