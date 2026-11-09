@@ -7,7 +7,7 @@ from cleaner.text_cleaner import TextCleaner
 
 # Configuración de la página
 st.set_page_config(
-    page_title="Agregador de Noticias sin Anuncios",
+    page_title="News without ads",
     page_icon="📰",
     layout="wide"
 )
