@@ -55,7 +55,14 @@ CATEGORIES = {
     "Deportes": {
         "BBC Sport": "https://feeds.bbci.co.uk/sport/rss.xml",
         "Marca": "https://e00-marca.uecdn.es/rss/portada.xml",
-        "TalkSport": "https://talksport.com/feed/"
+        "TalkSport": "https://talksport.com/feed/",
+        "Sky Sports Football": "https://www.skysports.com/rss/12040",
+        "FourFourTwo": "https://www.fourfourtwo.com/rss",
+        "Goal": "https://www.goal.com/feeds/en/news",
+        "France 24 Sport": "https://www.france24.com/en/sport/rss",
+        "Sportsnet Soccer": "https://www.sportsnet.ca/soccer/feed/",
+        "Reuters Sports": "https://www.reutersagency.com/feed/?best-regions=europe&post_type=best",
+        "The Guardian Sport": "https://www.theguardian.com/sport/rss"
     },
     "Cultura": {
         "The Guardian (Culture)": "https://www.theguardian.com/culture/rss",
