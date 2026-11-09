@@ -40,43 +40,44 @@ CATEGORIES = {
 @st.cache_data(ttl=3600)
 def fetch_full_article(url: str):
     """
-    Función optimizada con caché para realizar scraping bajo demanda del artículo completo
-    y extraer su texto principal e imágenes al expandir la noticia.
+    Función optimizada para extraer la imagen principal y todo el texto real del artículo 
+    recolectando y filtrando los párrafos de la página de origen.
     """
     try:
         headers = {'User-Agent': 'Mozilla/5.0 (Compatible; NewsCleanerBot/1.0)'}
-        response = requests.get(url, headers=headers, timeout=8)
+        response = requests.get(url, headers=headers, timeout=10)
         if response.status_code != 200:
             return "", []
 
         soup = BeautifulSoup(response.text, 'html.parser')
 
-        # Eliminar elementos molestos comunes (anuncios, navegación, scripts, footers)
-        for tag in soup(["script", "style", "nav", "footer", "header", "aside", "form"]):
+        # Eliminar elementos molestos comunes (anuncios, navegación, scripts, footers, etc.)
+        for tag in soup(["script", "style", "nav", "footer", "header", "aside", "form", "iframe", "noscript"]):
             tag.decompose()
 
-        # Intentar extraer la imagen principal de la noticia
+        # Extraer la imagen principal (Open Graph o la primera imagen útil)
         images = []
         og_image = soup.find("meta", property="og:image")
         if og_image and og_image.get("content"):
             images.append(og_image["content"])
         else:
-            # Buscar la primera imagen relevante dentro del contenido
             img_tag = soup.find("img")
             if img_tag and img_tag.get("src"):
                 images.append(img_tag["src"])
 
-        # Intentar aislar el cuerpo principal del artículo para no traer ruido
-        article_body = soup.find("article") or soup.find("div", class_=lambda x: x and ('content' in x.lower() or 'body' in x.lower()))
+        # Extracción robusta: Buscar todos los párrafos del documento que tengan longitud de texto real
+        paragraphs = soup.find_all('p')
         
-        if article_body:
-            paragraphs = article_body.find_all(['p', 'h2', 'h3'])
-        else:
-            paragraphs = soup.find_all(['p', 'h2', 'h3'])
+        valid_paragraphs = []
+        for p in paragraphs:
+            text = p.get_text().strip()
+            # Filtramos párrafos cortos de navegación, fechas o avisos publicitarios y nos quedamos con el contenido
+            if len(text) > 40:
+                valid_paragraphs.append(text)
 
-        full_text = "\n\n".join([p.get_text().strip() for p in paragraphs if len(p.get_text().strip()) > 30])
+        full_text = "\n\n".join(valid_paragraphs)
         
-        # Limpieza final de anuncios y banners
+        # Limpieza final de anuncios
         clean_text = TextCleaner.remove_ads_and_banners(full_text)
         return clean_text, images
 
