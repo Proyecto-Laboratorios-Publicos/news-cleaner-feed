@@ -12,7 +12,7 @@ st.set_page_config(
     layout="wide"
 )
 
-# Diccionario optimizado con los mejores diarios globales de referencia por categoría (Feeds RSS directos)
+# Diccionario maestro ampliado con los mejores diarios globales por categoría
 CATEGORIES = {
     "Tecnología": {
         "TechCrunch": "https://techcrunch.com/feed/",
@@ -34,6 +34,24 @@ CATEGORIES = {
         "Variety": "https://variety.com/feed/",
         "The Hollywood Reporter": "https://www.hollywoodreporter.com/feed/",
         "Deadline": "https://deadline.com/feed/"
+    },
+    "Ciencia y Salud": {
+        "Nature": "https://www.nature.com/nature.rss",
+        "Scientific American": "https://rss.sciam.com/ScientificAmerican-Global",
+        "New Scientist": "https://www.newscientist.com/feed/home/"
+    },
+    "Deportes": {
+        "ESPN": "https://www.espn.com/espn/rss/news",
+        "BBC Sport": "https://feeds.bbci.co.uk/sport/rss.xml"
+    },
+    "Cultura": {
+        "The Guardian (Culture)": "https://www.theguardian.com/culture/rss",
+        "BBC Culture": "https://feeds.bbci.co.uk/culture/rss.xml"
+    },
+    "Videojuegos / Gaming": {
+        "IGN": "https://feeds.ign.com/ign/all",
+        "GameSpot": "https://www.gamespot.com/feeds/mashup/",
+        "Polygon": "https://www.polygon.com/rss/index.xml"
     }
 }
 
@@ -71,7 +89,6 @@ def fetch_full_article(url: str):
         
         for p in paragraphs:
             text = p.get_text().strip()
-            # Filtramos párrafos cortos o basura para quedarnos con el contenido real
             if len(text) > 40:
                 cleaned_p = TextCleaner.remove_ads_and_banners(text)
                 if cleaned_p:
@@ -121,20 +138,22 @@ def main():
             with st.expander(f"📌 {title}"):
                 st.caption(f"📅 Publicado: {published}")
                 
-                # Mostramos un botón o cargamos el contenido completo al abrir
+                # Botón para cargar el artículo completo formateado en párrafos
                 if st.button(f"📥 Cargar artículo completo", key=link):
                     with st.spinner("Extrayendo texto completo e imágenes..."):
-                        full_text, images = fetch_full_article(link)
+                        paragraphs_list, images = fetch_full_article(link)
                         
-                        # Mostrar imágenes si se encontraron
+                        # Mostrar la imagen principal si se encontró
                         for img_url in images:
                             try:
                                 st.image(img_url, use_column_width=True)
                             except Exception:
                                 pass
 
-                        if full_text:
-                            st.write(full_text)
+                        # Renderizar cada párrafo por separado para mantener el formato visual
+                        if paragraphs_list:
+                            for p in paragraphs_list:
+                                st.write(p)
                         else:
                             st.write(clean_summary)
                 else:
