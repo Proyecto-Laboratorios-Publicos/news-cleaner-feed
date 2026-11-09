@@ -58,7 +58,6 @@ CATEGORIES = {
         "TalkSport": "https://talksport.com/feed/",
         "Sky Sports Football": "https://www.skysports.com/rss/12040",
         "FourFourTwo": "https://www.fourfourtwo.com/rss",
-        "Goal": "https://www.goal.com/feeds/en/news",
         "France 24 Sport": "https://www.france24.com/en/sport/rss",
         "The Guardian Sport": "https://www.theguardian.com/sport/rss"
     },
