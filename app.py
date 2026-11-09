@@ -27,7 +27,6 @@ CATEGORIES = {
     },
     "Política": {
         "BBC News (World)": "https://feeds.bbci.co.uk/news/world/rss.xml",
-        "The New York Times (Politics)": "https://rss.nytimes.com/services/xml/rss/nyt/Politics.xml",
         "The Guardian": "https://www.theguardian.com/world/rss"
     },
     "Espectáculos": {
