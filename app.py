@@ -25,7 +25,6 @@ CATEGORIES = {
         "ZDNET": "https://www.zdnet.com/news.rss",
         "The Next Web": "https://thenextweb.com/feed",
         "BleepingComputer": "https://www.bleepingcomputer.com/feed/",
-        "Hacker News": "https://news.ycombinator.com/rss",
         "MIT News Computing": "https://news.mit.edu/rss/topic/computing",
         "Slashdot": "http://rss.slashdot.org/Slashdot/slashdotMain"
     },
