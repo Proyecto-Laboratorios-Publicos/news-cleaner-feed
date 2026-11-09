@@ -38,7 +38,12 @@ CATEGORIES = {
     "Espectáculos": {
         "Variety": "https://variety.com/feed/",
         "The Hollywood Reporter": "https://www.hollywoodreporter.com/feed/",
-        "Deadline": "https://deadline.com/feed/"
+        "Deadline": "https://deadline.com/feed/",
+        "Rolling Stone": "https://www.rollingstone.com/feed/",
+        "IndieWire": "https://www.indiewire.com/feed/",
+        "Collider": "https://collider.com/feed/",
+        "Billboard": "https://www.billboard.com/feed/",
+        "E! Online": "https://www.eonline.com/syndication/feeds/rss/topstories.xml"
     },
     "Ciencia y Salud": {
         "Nature": "https://www.nature.com/nature.rss",
