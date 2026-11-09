@@ -41,8 +41,6 @@ CATEGORIES = {
     "Deportes": {
         "BBC Sport": "https://feeds.bbci.co.uk/sport/rss.xml",
         "Marca": "https://e00-marca.uecdn.es/rss/portada.xml",
-        "CBC Sports": "https://www.cbc.ca/webfeed/rss/sports",
-        "Bleacher Report": "https://bleacherreport.com/articles/feed"
     },
     "Cultura": {
         "The Guardian (Culture)": "https://www.theguardian.com/culture/rss",
