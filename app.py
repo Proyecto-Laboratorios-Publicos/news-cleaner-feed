@@ -25,8 +25,6 @@ CATEGORIES = {
         "Business Insider (Markets)": "https://markets.businessinsider.com/rss/news",
         "Seeking Alpha": "https://seekingalpha.com/market_currents.xml",
         "PR Newswire": "https://www.prnewswire.com/rss/financial-services-latest-news/financial-services-latest-news-list.rss",
-        "Reuters Business": "https://www.reutersagency.com/feed/?best-regions=americas&post_type=best",
-        "AP News Business": "https://news.google.com/rss/search?q=when:24h+site:apnews.com/hub/business&hl=en-US&gl=US&ceid=US:en",
         "SEC News": "https://www.sec.gov/news/pressreleases.rss"
     },
     "Política": {
