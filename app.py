@@ -30,11 +30,6 @@ CATEGORIES = {
         "MarketWatch": "https://feeds.marketwatch.com/marketwatch/topstories/",
         "Financial Post": "https://financialpost.com/feed/",
         "The Motley Fool": "https://www.fool.com/feed/",
-        "Fortune (Finance)": "https://fortune.com/feed/fortune-feed/",
-        "Forbes (Money)": "https://www.forbes.com/innovation/feed/",
-        "Kitco News": "https://www.kitco.com/rss/net/kitconews.xml",
-        "FXStreet": "https://www.fxstreet.com/rss",
-        "Zacks": "https://www.zacks.com/rss/zacks_news.rss",
         "Seeking Alpha": "https://seekingalpha.com/market_currents.xml",
         "PR Newswire": "https://www.prnewswire.com/rss/financial-services-latest-news/financial-services-latest-news-list.rss"
     },
