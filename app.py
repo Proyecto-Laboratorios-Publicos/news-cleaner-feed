@@ -55,8 +55,6 @@ CATEGORIES = {
     "Deportes": {
         "BBC Sport": "https://feeds.bbci.co.uk/sport/rss.xml",
         "Marca": "https://e00-marca.uecdn.es/rss/portada.xml",
-        "Sky Sports": "https://www.skysports.com/core/news/12040/1/rss",
-        "CBC Sports": "https://www.cbc.ca/webfeed/rss/sports",
         "TalkSport": "https://talksport.com/feed/"
     },
     "Cultura": {
