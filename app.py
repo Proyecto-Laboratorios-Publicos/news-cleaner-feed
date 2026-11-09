@@ -48,7 +48,6 @@ CATEGORIES = {
         "Hyperallergic": "https://hyperallergic.com/feed/",
         "ARTnews": "https://www.artnews.com/feed/",
         "Open Culture": "https://www.openculture.com/feed",
-        "Los Angeles Review of Books": "https://lareviewofbooks.org/feed/"
     },
     "Videojuegos / Gaming": {
         "IGN": "https://feeds.ign.com/ign/all",
