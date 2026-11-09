@@ -22,7 +22,7 @@ CATEGORIES = {
 }
 
 def main():
-    print("=== Agregador de Noticias sin Anuncios ===")
+    print("=== News without ads ===")
     print("Seleccione la categoría que desea consultar:\n")
     
     for key, cat in CATEGORIES.items():
