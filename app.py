@@ -27,7 +27,6 @@ CATEGORIES = {
         "BleepingComputer": "https://www.bleepingcomputer.com/feed/",
         "Hacker News": "https://news.ycombinator.com/rss",
         "MIT News Computing": "https://news.mit.edu/rss/topic/computing",
-        "Linux Today": "https://www.linuxtoday.com/feed/ネルギー",
         "Slashdot": "http://rss.slashdot.org/Slashdot/slashdotMain"
     },
     "Finance and Economics": {
